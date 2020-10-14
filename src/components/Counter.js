@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 export default function Counter(props){
-  const {num = 0, step = 1, max, min} = props
+  const {num, step = 1, max, min} = props
 
   const [innerNum,changeInnerNum] = useState(num)
 
@@ -23,9 +23,13 @@ export default function Counter(props){
 
   const changeNum = (event)=>{
     if(event.target.value != null){
+      if(event.target.value === ''){
+        changeInnerNum('')
+        return;
+      }
       const inputNum = Number(event.target.value)
       if(Number.isNaN(inputNum)){
-        changeInnerNum(0)
+        changeInnerNum('')
       }else{
         if(max != null && inputNum > max){
           changeInnerNum(max)

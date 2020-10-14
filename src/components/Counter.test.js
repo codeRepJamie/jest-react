@@ -8,9 +8,9 @@ test('标题是Counter', () => {
   expect(screen.getByText('Counter'))
 })
 
-test('初始值为0', () => {
+test('初始值输入框为空字符串', () => {
   render(<Counter />)
-  expect(screen.getByDisplayValue('0'))
+  expect(screen.getByDisplayValue(''))
 })
 
 test('根据props回填输入框',()=>{
@@ -28,16 +28,20 @@ test('点击-号减一',()=>{
   expect(screen.getByDisplayValue('1'))
 })
 
-test('设置输入框改变num值',()=>{
+test('设置输入框改变num值,输入框输入空值,输入框为空',()=>{
   const container = render(<Counter num={3}/>)
-  fireEvent.change(screen.getByDisplayValue('3'), { target: { value: '20'} })
+  fireEvent.change(screen.getByDisplayValue('3'), { target: { value: '0'} })
+  expect(screen.getByDisplayValue('0'))
+  fireEvent.change(screen.getByDisplayValue('0'), { target: { value: '20'} })
   expect(screen.getByDisplayValue('20'))
+  fireEvent.change(screen.getByDisplayValue('20'), { target: { value: ''} })
+  expect(screen.getByDisplayValue(''))
 })
 
 test('输入框只能输入数字，非数字统一设置为0',()=>{
   const container = render(<Counter num={3}/>)
   fireEvent.change(screen.getByDisplayValue('3'), { target: { value: '测试输入汉字'} })
-  expect(screen.getByDisplayValue('0'))
+  expect(screen.getByDisplayValue(''))
 })
 
 test('输入框内置数字转换, 输入0032, 最终输出32',()=>{
