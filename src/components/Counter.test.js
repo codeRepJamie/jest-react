@@ -71,3 +71,12 @@ test('设置最大值与最小值,在输入框上输入数据边界外的数字,
   fireEvent.change(screen.getByDisplayValue('5'), { target: { value: '0'} })
   expect(screen.getByDisplayValue('1'))
 })
+
+test('设置step=2，点击+号或-号时候，结果递增2或递减2',()=>{
+  const container = render(<Counter num={3} step={2}/>)
+  fireEvent.click(screen.getByText('+'))
+  fireEvent.click(screen.getByText('+'))
+  expect(screen.getByDisplayValue('7'))
+  fireEvent.click(screen.getByText('-'))
+  expect(screen.getByDisplayValue('5'))
+})

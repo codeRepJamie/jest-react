@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 
 export default function Counter(props){
-  const {num = 0, max, min} = props
+  const {num = 0, step = 1, max, min} = props
 
   const [innerNum,changeInnerNum] = useState(num)
 
   const addNum =() => {
-    const current = innerNum+1
+    const current = innerNum + step
     if(max != null && current > max){
       return;
     }
@@ -14,7 +14,7 @@ export default function Counter(props){
   }
 
   const minusNum =() => {
-    const current = innerNum - 1
+    const current = innerNum - step
     if(min != null && current < min){
       return;
     }
