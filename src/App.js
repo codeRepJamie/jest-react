@@ -1,4 +1,5 @@
 import React from 'react';
+import Counter from "./components/Counter";
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p>   
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
@@ -18,6 +19,7 @@ function App() {
         >
           Learn React
         </a>
+        <Counter />
       </header>
     </div>
   );
