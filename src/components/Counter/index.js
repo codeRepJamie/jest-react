@@ -1,11 +1,18 @@
 import React, {useState} from "react";
+import './Counter.css';
 
 export default function Counter(props){
-  const {num, step = 1, max, min, onChange} = props
+  const {num = '', step = 1, max, min, onChange} = props
 
   const [innerNum,changeInnerNum] = useState(num)
 
   const _changeInnerNum = _innerNum => {
+    if(max != null && _innerNum > max){
+      _innerNum = max
+    }
+    if(min != null && _innerNum < min){
+      _innerNum = min
+    }
     changeInnerNum(_innerNum)
     if(onChange != null && typeof onChange === 'function'){
       onChange.call(null, _innerNum)
@@ -17,18 +24,12 @@ export default function Counter(props){
   }
 
   const addNum =() => {
-    const current = innerNum + step
-    if(max != null && current > max){
-      return;
-    }
+    let current = Number(innerNum) + step
     _changeInnerNum(current)
   }
 
   const minusNum =() => {
-    const current = innerNum - step
-    if(min != null && current < min){
-      return;
-    }
+    let current = Number(innerNum) - step
     _changeInnerNum(current)
   }
 
@@ -46,22 +47,14 @@ export default function Counter(props){
       if(Number.isNaN(inputNum)){
         _changeInnerNum('')
       }else{
-        if(max != null && inputNum > max){
-          _changeInnerNum(max)
-          return;
-        }
-        if(min != null && min > inputNum){
-          _changeInnerNum(min)
-          return;
-        }
         _changeInnerNum(inputNum)
       }
     }
   }
 
   return (
-  <div>
-    <p>Counter</p>
+  <div className="counter">
+    <p className="title">Counter</p>
     <button onClick={minusNum}>-</button><input onChange={changeNum} value={innerNum} /><button onClick={addNum}>+</button>
   </div>
   )

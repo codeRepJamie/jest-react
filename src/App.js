@@ -1,9 +1,14 @@
-import React from 'react';
-import Counter from "./components/Counter";
+import React, {useState} from 'react';
+import Counter from "./components/Counter/index";
+import AntdCounter from "./components/AntdCounter/index";
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  const [counter1,changeCounter1] = useState(2)
+  const [counter2,changeCounter2] = useState(3)
+
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +24,11 @@ function App() {
         >
           Learn React
         </a>
-        <Counter/>
+        <Counter num={counter1} onChange={ value => changeCounter1(value)}/>
+        result: {counter1}
+        <hr></hr>
+        <AntdCounter num={counter2} onChange={ value => changeCounter2(value)}/>
+        result: {counter2}
       </header>
     </div>
   );

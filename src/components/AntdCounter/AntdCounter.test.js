@@ -1,27 +1,41 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { queryByTestId,getByTestId,screen,queryHelpers,fireEvent } from '@testing-library/dom'
-import Counter from './Counter';
+import Counter from '.';
 
 test('标题是Counter', () => {
   render(<Counter />)
-  expect(screen.getByText('Counter'))
+  expect(screen.getByText('Antd Counter'))
 })
 
-test('初始值输入框为空字符串', () => {
+test('无初始值，输入框为空字符串', () => {
   render(<Counter />)
   expect(screen.getByDisplayValue(''))
+})
+
+test('无初始值，点击+号', () => {
+  render(<Counter />)
+  fireEvent.click(screen.getByText('+'))
+  expect(screen.getByDisplayValue('1'))
+})
+
+test('无初始值，点击-号', () => {
+  render(<Counter />)
+  fireEvent.click(screen.getByText('-'))
+  expect(screen.getByDisplayValue('-1'))
 })
 
 test('根据props回填输入框',()=>{
   render(<Counter num={20}/>)
   expect(screen.getByDisplayValue('20'))
 })
+
 test('点击+号加一',()=>{
   render(<Counter num={1}/>)
   fireEvent.click(screen.getByText('+'))
   expect(screen.getByDisplayValue('2'))
 })
+
 test('点击-号减一',()=>{
   render(<Counter num={2}/>)
   fireEvent.click(screen.getByText('-'))
@@ -66,6 +80,15 @@ test('设置最大值5，点击加号多次不能超过5',()=>{
 
 test('设置最小值1，点击减号多次不能少于1',()=>{
   const container = render(<Counter num={3} min={1}/>)
+  for(let i=0;i<5;i++){
+    // 点击5次加号
+    fireEvent.click(screen.getByText('-'))
+  }
+  expect(screen.getByDisplayValue('1'))
+})
+
+test('无初始值,设置最小值1，点击减号多次不能少于1',()=>{
+  const container = render(<Counter min={1}/>)
   for(let i=0;i<5;i++){
     // 点击5次加号
     fireEvent.click(screen.getByText('-'))
