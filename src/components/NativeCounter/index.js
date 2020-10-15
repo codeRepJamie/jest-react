@@ -1,5 +1,5 @@
 import React from "react";
-import useCounter from "../Counter/index";
+import useCounter from "../Hooks/useCounter";
 import './Counter.css';
 
 export default function Counter(props){
