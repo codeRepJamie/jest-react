@@ -1,16 +1,27 @@
 import React, {useState} from "react";
 
 export default function Counter(props){
-  const {num, step = 1, max, min} = props
+  const {num, step = 1, max, min, onChange} = props
 
   const [innerNum,changeInnerNum] = useState(num)
+
+  const _changeInnerNum = _innerNum => {
+    changeInnerNum(_innerNum)
+    if(onChange != null && typeof onChange === 'function'){
+      onChange.call(null, _innerNum)
+    }
+  }
+
+  const setMinus = () => {
+    changeInnerNum('-')
+  }
 
   const addNum =() => {
     const current = innerNum + step
     if(max != null && current > max){
       return;
     }
-    changeInnerNum(current)
+    _changeInnerNum(current)
   }
 
   const minusNum =() => {
@@ -18,28 +29,32 @@ export default function Counter(props){
     if(min != null && current < min){
       return;
     }
-    changeInnerNum(current)
+    _changeInnerNum(current)
   }
 
   const changeNum = (event)=>{
     if(event.target.value != null){
       if(event.target.value === ''){
-        changeInnerNum('')
+        _changeInnerNum('')
+        return;
+      }
+      if(event.target.value === '-'){
+        setMinus()
         return;
       }
       const inputNum = Number(event.target.value)
       if(Number.isNaN(inputNum)){
-        changeInnerNum('')
+        _changeInnerNum('')
       }else{
         if(max != null && inputNum > max){
-          changeInnerNum(max)
+          _changeInnerNum(max)
           return;
         }
         if(min != null && min > inputNum){
-          changeInnerNum(min)
+          _changeInnerNum(min)
           return;
         }
-        changeInnerNum(inputNum)
+        _changeInnerNum(inputNum)
       }
     }
   }

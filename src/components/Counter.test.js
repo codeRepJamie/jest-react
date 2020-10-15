@@ -28,13 +28,18 @@ test('点击-号减一',()=>{
   expect(screen.getByDisplayValue('1'))
 })
 
-test('设置输入框改变num值,输入框输入空值,输入框为空',()=>{
+test('设置输入框改变num值,对输入框输入数字字符进行处理',()=>{
   const container = render(<Counter num={3}/>)
   fireEvent.change(screen.getByDisplayValue('3'), { target: { value: '0'} })
   expect(screen.getByDisplayValue('0'))
   fireEvent.change(screen.getByDisplayValue('0'), { target: { value: '20'} })
   expect(screen.getByDisplayValue('20'))
-  fireEvent.change(screen.getByDisplayValue('20'), { target: { value: ''} })
+  
+})
+
+test('输入框输入空值,输入框显示为空',()=>{
+  const container = render(<Counter num={3}/>)
+  fireEvent.change(screen.getByDisplayValue('3'), { target: { value: ''} })
   expect(screen.getByDisplayValue(''))
 })
 
@@ -83,4 +88,32 @@ test('设置step=2，点击+号或-号时候，结果递增2或递减2',()=>{
   expect(screen.getByDisplayValue('7'))
   fireEvent.click(screen.getByText('-'))
   expect(screen.getByDisplayValue('5'))
+})
+
+test('测试更改数据回调',()=>{
+  const changeNumCb = jest.fn(num=>{})
+  const container = render(<Counter num={3} onChange={changeNumCb}/>)
+  fireEvent.click(screen.getByText('+'))
+  fireEvent.click(screen.getByText('+'))
+  fireEvent.click(screen.getByText('-'))
+  fireEvent.change(screen.getByDisplayValue('4'), { target: { value: '0'} })
+  // 此 mock 函数被调用了4次
+  expect(changeNumCb.mock.calls.length).toBe(4)
+  // 第一次函数调用的返回值是 4
+  expect(changeNumCb.mock.calls[0][0]).toBe(4)
+  // 第二次函数调用的返回值是 5
+  expect(changeNumCb.mock.calls[1][0]).toBe(5)
+  // 第三次函数调用的返回值是 4
+  expect(changeNumCb.mock.calls[2][0]).toBe(4)
+  // 第四次函数调用的返回值是 0
+  expect(changeNumCb.mock.calls[3][0]).toBe(0)
+})
+
+test('输入框输入负号-,输入框显示为"-",回调不触发',()=>{
+  const changeNumCb = jest.fn(num=>{})
+  const container = render(<Counter num={3} onChange={changeNumCb}/>)
+  fireEvent.change(screen.getByDisplayValue('3'), { target: { value: '-'} })
+  expect(screen.getByDisplayValue('-'))
+  // 此 mock 函数被调用了0次
+  expect(changeNumCb.mock.calls.length).toBe(0)
 })

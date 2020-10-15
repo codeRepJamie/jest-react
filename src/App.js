@@ -19,7 +19,7 @@ function App() {
         >
           Learn React
         </a>
-        <Counter />
+        <Counter/>
       </header>
     </div>
   );
