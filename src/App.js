@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Counter from "./components/Counter/index";
+import Counter from "./components/NativeCounter/index";
 import AntdCounter from "./components/AntdCounter/index";
 import logo from './logo.svg';
-import './App.css';
+import './App.css'; 
 
 function App() {
 

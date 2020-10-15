@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import './Counter.css';
 
-export default function Counter(props){
+export default function useCounter(props) {
   const {num = '', step = 1, max, min, onChange} = props
 
   const [innerNum,changeInnerNum] = useState(num)
@@ -52,10 +51,10 @@ export default function Counter(props){
     }
   }
 
-  return (
-  <div className="counter">
-    <p className="title">Counter</p>
-    <button onClick={minusNum}>-</button><input onChange={changeNum} value={innerNum} /><button onClick={addNum}>+</button>
-  </div>
-  )
-}
+  return {
+    changeNum,
+    innerNum,
+    addNum,
+    minusNum,
+  }
+} 
