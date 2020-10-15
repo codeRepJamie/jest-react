@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 
 export default function useCounter(props) {
   const {num = '', step = 1, max, min, onChange} = props

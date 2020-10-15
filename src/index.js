@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import mockXHR from './mock/index';
 
+mockXHR();
 ReactDOM.render(
   <App />,
   document.getElementById('root')

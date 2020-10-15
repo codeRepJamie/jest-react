@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import useCounter from "../Counter/index";
 import './Counter.css';
 
