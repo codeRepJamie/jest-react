@@ -1,6 +1,6 @@
 import React from "react";
 import { Input } from 'antd';
-import useCounter from "../Hooks/useCounter";
+import useCounter from "../../Hooks/useCounter";
 
 export default function Counter(props){
   const {
