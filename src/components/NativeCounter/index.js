@@ -12,7 +12,7 @@ export default function Counter(props){
 
   return (
   <div className="counter">
-    <p className="title">Counter</p>
+    <p className="title">NativeCounter</p>
     <button onClick={minusNum}>-</button><input onChange={changeNum} value={innerNum} /><button onClick={addNum}>+</button>
   </div>
   )

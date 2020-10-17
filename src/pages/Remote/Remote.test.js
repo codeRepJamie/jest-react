@@ -5,8 +5,9 @@ import Remote from '.';
 import mockXHR from '../../mock/index';
 
 beforeAll(() => mockXHR())
-
-test('远程内容', async () => {
-  render(<Remote />)
-  await waitFor(()=> screen.getByText('Remote getData: form server'))
+describe('测试Remote',()=>{
+  it('远程内容', async () => {
+    render(<Remote />)
+    await waitFor(()=> screen.getByText('Remote getData: form server'))
+  })
 })
