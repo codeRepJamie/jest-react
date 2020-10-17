@@ -22,7 +22,7 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 describe("测试表单输入检查", () => {
-  it("测试表单必填项,无任何填写报错", async () => {
+  it("测试表单必填项,直接提交显示错误", async () => {
     const { container } = render(<TestForm />);
     const form = container.querySelector('form')
     fireEvent.submit(form)

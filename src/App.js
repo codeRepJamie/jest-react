@@ -4,6 +4,7 @@ import { Link, Route, useLocation, BrowserRouter,Switch } from 'react-router-dom
 import Home from "./pages/Home/index";
 import Remote from "./pages/Remote/index";
 import TestForm from "./pages/TestForm/index";
+import FreeDesign from "./pages/FreeDesign/index";
 
 function Navigator() {
   let location = useLocation();
@@ -12,6 +13,7 @@ function Navigator() {
       <Link to="/"><Radio.Button value="/">简单测试</Radio.Button></Link>
       <Link to="/remote"><Radio.Button value="/remote">远程接口测试</Radio.Button></Link>
       <Link to="/testForm"><Radio.Button value="/testForm">表单填写测试</Radio.Button></Link>
+      <Link to="/freeDesign"><Radio.Button value="/testForm">免费设计</Radio.Button></Link>
     </Radio.Group>
   )
 }
@@ -24,6 +26,7 @@ function App() {
       <Switch>        
         <Route path="/remote" component={Remote} />
         <Route path="/testForm" component={TestForm} />
+        <Route path="/freeDesign" component={FreeDesign} />
         <Route path="/" component={Home} />
       </Switch>
     </BrowserRouter>

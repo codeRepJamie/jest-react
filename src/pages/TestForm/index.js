@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Form, Input, Button, Checkbox, Radio, DatePicker, Select } from 'antd';
 import moment from 'moment'
+import {Link} from 'react-router-dom';
 
 const layout = {
   labelCol: { span: 8 },
@@ -67,8 +68,8 @@ export default function TestForm(params) {
           rules={[{ required: true, message: '请选择保险类型' }]}
         >
           <Select>
-            <Select.Option value={0} data-testid="人寿险">人寿险</Select.Option>
-            <Select.Option value={1} data-testid="旅游险">旅游险</Select.Option>
+            <Select.Option value={0}>人寿险</Select.Option>
+            <Select.Option value={1}>旅游险</Select.Option>
           </Select>
         </Form.Item>
          <Form.Item
@@ -121,7 +122,7 @@ export default function TestForm(params) {
             { pattern:/^1[3|4|5|7|8][0-9]\d{8}$/, message:'请输入正确的手机号码'}
           ]}
         >
-          <Input placeholder="请输入手机号码"/>
+          <Input placeholder="请输入手机号码" />
         </Form.Item>
         <Form.Item
           label="电子邮箱"
