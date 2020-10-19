@@ -13,7 +13,7 @@ function Navigator() {
       <Link to="/"><Radio.Button value="/">简单测试</Radio.Button></Link>
       <Link to="/remote"><Radio.Button value="/remote">远程接口测试</Radio.Button></Link>
       <Link to="/testForm"><Radio.Button value="/testForm">表单填写测试</Radio.Button></Link>
-      <Link to="/freeDesign"><Radio.Button value="/testForm">免费设计</Radio.Button></Link>
+      <Link to="/freeDesign"><Radio.Button value="/freeDesign">免费设计</Radio.Button></Link>
     </Radio.Group>
   )
 }
