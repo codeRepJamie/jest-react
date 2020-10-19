@@ -17,13 +17,15 @@ export default function FreeDesign(){
 
   const [state, changeState] = useState({
     showChangeButton: false,
-    enableSubmit: false
+    enableSubmit: false,
+    enableVertify: false
   })
 
   const onValuesChange = (changedVal,values) => {
     changeState({
       ...state,
       enableSubmit: !isNull(values.phone) &&  !isNull(values.vertify),
+      enableVertify: !isNull(values.phone) && /^1[3|4|5|7|8][0-9]\d{8}$/.test(values.phone),
       showChangeButton: !isNull(values.phone)
     })
   }
@@ -37,7 +39,8 @@ export default function FreeDesign(){
     changeState({
       ...state,
       enableSubmit: false,
-      showChangeButton: false
+      showChangeButton: false,
+      enableVertify: false
     })
   }
 
@@ -88,7 +91,7 @@ export default function FreeDesign(){
           <Input placeholder="输入手机号码" suffix={<a onClick={changePhone} style={{display:state.showChangeButton?'inline-block':'none'}} href="#">更换电话号码</a>}/>
         </Form.Item>
         <Form.Item label="验证码" name="vertify" rules={[{required:true,message:'请输入验证码'}]}>
-          <Input addonAfter={<Button onClick={changeVertify}>获取验证码</Button>}/>
+          <Input addonAfter={<Button {...{ disabled : !state.enableVertify , onClick :changeVertify }} >获取验证码</Button>}/>
         </Form.Item>
         <Form.Item {...tailLayout}>
           <Button htmlType="submit" {...{ disabled : !state.enableSubmit }}>提交</Button>
